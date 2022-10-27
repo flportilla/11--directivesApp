@@ -9,21 +9,40 @@
         </div>
 
         <div class="col-auto">
-            <input type="text" class="form-control" formControlName="name">
+            <input 
+                type="text" 
+                class="form-control" 
+                formControlName="name"
+
+                >
         </div>
 
         <div class="col-auto">
             <span
                 errorMsg
-                *ngIf="hasError('name')"
+                [valid]="!hasError('name')"
+                [message]="newMessage"
+                [color]="newColor"
                 >
             </span>
         </div>
 
         <div class="row mt-3">
             <div class="col">
-                <button class="btn btn-primary">
-                    Save
+                <button 
+                    class="btn btn-primary"
+                    (click)="changeName()"
+                    >
+                    Change text
+                </button>
+
+                &nbsp;
+
+                <button 
+                    class="btn btn-primary"
+                    (click)="changeColor()"
+                    >
+                    Change color
                 </button>
             </div>
         </div>
@@ -33,3 +52,11 @@
 <h5 class="mt-5">Form </h5>
 <pre>Valid: {{ myForm.valid }}</pre>
 <pre>Value: {{ myForm.value | json }}</pre>
+
+<div class="row mt-5" *customIf="myForm.valid">
+    <div class="col">
+        <div class="alert alert-primary">
+            Everything ok!
+        </div>
+    </div>
+</div>
